@@ -15,7 +15,8 @@ const main = async () => {
 
     console.log(`\nSender balance before: ${ethers.utils.formatEther(senderBalanceBefore)}`)
     console.log(`reciever balance before: ${ethers.utils.formatEther(recieverBalanceBefore)}\n`)
-
+    // sendTransaction is function from Signer
+    // https://docs.ethers.org/v5/api/signer/
     const tx = await wallet.sendTransaction({
         to: account2,
         value: ethers.utils.parseEther("0.025")

@@ -18,6 +18,8 @@ const contract = new ethers.Contract(address, ERC20_ABI, provider)
 const main = async () => {
     const block = await provider.getBlockNumber()
 
+    // queryFilter is a function from ethers.js that returns the matched event from block to block
+    // https://docs.ethers.org/v5/api/contract/contract/#Contract-queryFilter
     const transferEvents = await contract.queryFilter('Transfer', block - 1, block)
     console.log(transferEvents)
 }

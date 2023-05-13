@@ -8,6 +8,10 @@ const account2 = '' // Your account address 2
 
 const privateKey1 = '' // Private key of account 1
 const wallet = new ethers.Wallet(privateKey1, provider)
+// create a wallet using private key
+// The Wallet class inherits Signer and can sign transactions and messages using a private key as a standard Externally Owned Account (EOA).
+// wallet can use function from Signer abstract class
+// https://docs.ethers.org/v5/api/signer/#Wallet
 
 const ERC20_ABI = [
     "function balanceOf(address) view returns (uint)",
@@ -26,7 +30,7 @@ const main = async () => {
     const contractWithWallet = contract.connect(wallet)
 
     const tx = await contractWithWallet.transfer(account2, balance)
-    await tx.wait()
+    await tx.wait()  // wait for tx to be mined
 
     console.log(tx)
 
@@ -38,3 +42,10 @@ const main = async () => {
 }
 
 main()
+
+// Another way to write to contract
+// using Metamask
+// const provider = new ethers.providers.Web3Provider(window.ethereum);
+// const contract = new ethers.Contract(address,abi,provider.getSigner());    // pop up Metamask to sign tx
+
+// const result =  await contract.functionName(parameter)  // calling contract with the signer that connected to Metamask
